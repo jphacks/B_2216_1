@@ -1,3 +1,7 @@
 venv/
 __pycache__/
 .mypy_cache/
+
+# docker mysql volumes
+data/
+conf/
