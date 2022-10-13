@@ -5,7 +5,9 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    command: ./wait-for-it.sh db:3306 --timeout=30 --strict -- python main.py
+    command: ./wait-for-it.sh db:3306 --timeout=30 --strict -- python main.py --host 0.0.0.0
+    ports:
+      - 8080:8080
   db:
     image: mysql:8-oracle
     environment:
