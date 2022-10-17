@@ -55,27 +55,3 @@ def push_data(data: schemas.TimeDataCreate, db: Session = Depends(get_db)):
     if ret == None:
         raise HTTPException(status_code=404, detail="Sensor ID not found")
     return ret
-
-# @app.post("/sensors/", response_model=schemas.Sensor)
-# def create_sensor(sensor: schemas.SensorCreate, db: Session = Depends(get_db)):
-#     db_sensor = crud.create_user_sensor(db, sensor, )
-
-# @app.get("/sensors/{sensor_id}", response_model=schemas.Sensor)
-# def read_sensor(sensor_id: int, db: Session = Depends(get_db)):
-#     db_sensor = crud.get_sensor(db, sensor_id=sensor_id)
-#     if db_sensor is None:
-#         raise HTTPException(status_code=404, detail="User not found")
-#     return db_sensor
-
-
-# @app.post("/users/{user_id}/items/", response_model=schemas.Item)
-# def create_item_for_user(
-#     user_id: int, item: schemas.ItemCreate, db: Session = Depends(get_db)
-# ):
-#     return crud.create_user_item(db=db, item=item, user_id=user_id)
-
-
-# @app.get("/items/", response_model=List[schemas.Item])
-# def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-#     items = crud.get_items(db, skip=skip, limit=limit)
-#     return items
