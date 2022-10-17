@@ -1,4 +1,5 @@
 import argparse
+import random
 import uvicorn
 from typing import List
 
@@ -53,3 +54,11 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
 # def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 #     items = crud.get_items(db, skip=skip, limit=limit)
 #     return items
+
+## dummy get TODO: implement 
+@app.get("/data/{sensor_id}/today", response_model=List[schemas.TimeData])
+def get_today_data(sensor_id, db: Session = Depends(get_db)):
+    ret = []
+    for i in range(24):
+        ret.append({"sensor_id": sensor_id,"timestamp": i, "value": random.randint(10, 30)})
+    return ret

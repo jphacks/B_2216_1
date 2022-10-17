@@ -29,13 +29,13 @@ class User(UserBase):
 
 class TimeDataBase(BaseModel):
     sensor_id: int
+    value: int
+    timestamp: int
 
 class TimeDataCreate(TimeDataBase):
-    timestamp: int
-    value: int
+    pass
 
 class TimeData(TimeDataBase):
-    id: int
-
+    sensor_id: int
     class Config:
         orm_mode = True
