@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List
 from pydantic import BaseModel
 
@@ -30,7 +31,7 @@ class User(UserBase):
 class TimeDataBase(BaseModel):
     sensor_id: int
     value: int
-    timestamp: int
+    timestamp: datetime
 
 class TimeDataCreate(TimeDataBase):
     pass

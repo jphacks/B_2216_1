@@ -42,6 +42,31 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
 
+@app.get("/data/{sensor_id}/today", response_model=List[schemas.TimeData])
+def get_today_data(sensor_id, db: Session = Depends(get_db)):
+    ret = crud.get_timedata(db, sensor_id=sensor_id, limit=24)
+    if ret == None:
+        raise HTTPException(status_code=404, detail="Sensor ID not found")
+    return ret
+
+@app.post("/data/", response_model=schemas.TimeData)
+def push_data(data: schemas.TimeDataCreate, db: Session = Depends(get_db)):
+    ret = crud.create_timedata(db, timedata=data)
+    if ret == None:
+        raise HTTPException(status_code=404, detail="Sensor ID not found")
+    return ret
+
+# @app.post("/sensors/", response_model=schemas.Sensor)
+# def create_sensor(sensor: schemas.SensorCreate, db: Session = Depends(get_db)):
+#     db_sensor = crud.create_user_sensor(db, sensor, )
+
+# @app.get("/sensors/{sensor_id}", response_model=schemas.Sensor)
+# def read_sensor(sensor_id: int, db: Session = Depends(get_db)):
+#     db_sensor = crud.get_sensor(db, sensor_id=sensor_id)
+#     if db_sensor is None:
+#         raise HTTPException(status_code=404, detail="User not found")
+#     return db_sensor
+
 
 # @app.post("/users/{user_id}/items/", response_model=schemas.Item)
 # def create_item_for_user(
@@ -54,11 +79,3 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
 # def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 #     items = crud.get_items(db, skip=skip, limit=limit)
 #     return items
-
-## dummy get TODO: implement 
-@app.get("/data/{sensor_id}/today", response_model=List[schemas.TimeData])
-def get_today_data(sensor_id, db: Session = Depends(get_db)):
-    ret = []
-    for i in range(24):
-        ret.append({"sensor_id": sensor_id,"timestamp": i, "value": random.randint(10, 30)})
-    return ret

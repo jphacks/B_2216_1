@@ -22,10 +22,11 @@ def create_user(db: Session, user: schemas.UserCreate):
     db.refresh(db_user)
     return db_user
 
-
 def get_sensors(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Sensor).offset(skip).limit(limit).all()
 
+def get_sensor(db: Session, sensor_id: int):
+    return db.query(models.Sensor).filter(models.Sensor.id == sensor_id).first()
 
 def create_user_sensor(db: Session, sensor: schemas.SensorCreate, user_id: int):
     db_sensor = models.Sensor(**sensor.dict(), user_id=user_id)
@@ -39,8 +40,8 @@ def get_timedata(db: Session, sensor_id: int, skip: int = 0, limit: int = 100):
     return db.query(models.TimeData).filter(models.TimeData.sensor_id == sensor_id).offset(skip).limit(limit).all()
 
 
-def create_sensor_timedata(db: Session, timedata: schemas.TimeData, sensor_id: int):
-    db_timedata = models.TimeData(**timedata.dict(), sensor_id=sensor_id)
+def create_timedata(db: Session, timedata: schemas.TimeData):
+    db_timedata = models.TimeData(**timedata.dict())
     db.add(db_timedata)
     db.commit()
     db.refresh(db_timedata)
