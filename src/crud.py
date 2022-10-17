@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy.orm import Session
 
 from . import models, schemas
@@ -40,8 +41,9 @@ def get_timedata(db: Session, sensor_id: int, skip: int = 0, limit: int = 100):
     return db.query(models.TimeData).filter(models.TimeData.sensor_id == sensor_id).offset(skip).limit(limit).all()
 
 
-def create_timedata(db: Session, timedata: schemas.TimeData):
-    db_timedata = models.TimeData(**timedata.dict())
+def create_timedata(db: Session, timedata: schemas.TimeDataCreate):
+    now = datetime.now()
+    db_timedata = models.TimeData(**timedata.dict(), timestamp=now)
     db.add(db_timedata)
     db.commit()
     db.refresh(db_timedata)
