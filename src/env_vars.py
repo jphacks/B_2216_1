@@ -4,4 +4,3 @@ load_dotenv(verbose=True)
 values = dotenv_values(verbose=True)
 
 DATABASE_URI = values['DATABASE_URI']
-print(DATABASE_URI)
