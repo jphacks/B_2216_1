@@ -1,9 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-
-# DATABASE_URI = "mysql+mysqlconnector://root:jphacks@localhost/db"
-DATABASE_URI = "sqlite:///./sql_app.db"
+from .env_vars import DATABASE_URI
 
 engine = create_engine(
     DATABASE_URI, connect_args={"check_same_thread": False}

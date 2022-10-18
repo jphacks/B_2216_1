@@ -1,6 +1,3 @@
-import argparse
-import random
-import uvicorn
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException

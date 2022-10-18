@@ -7,3 +7,9 @@ __pycache__/
 # docker mysql volumes
 data/
 conf/
+
+# log
+logs/
+
+# envs
+.env*
