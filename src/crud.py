@@ -54,8 +54,6 @@ def get_timedata_mean(db: Session, sensor_id: int):
             mean += data.value
         if len(datas) > 0:
             mean /= len(datas)
-        else:
-            mean = -1
         ret.append(schemas.TimeData(id=sensor_id, timestamp=time, value=mean))
     return ret
 
