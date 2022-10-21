@@ -39,7 +39,7 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
 
-@app.get("/data/{sensor_id}/today", response_model=List[schemas.TimeData])
+@app.get("/data/today/{sensor_id}", response_model=List[schemas.TimeData])
 def get_today_data(sensor_id, db: Session = Depends(get_db)):
     ret = crud.get_timedata(db, sensor_id=sensor_id, limit=24)
     if ret == None:
