@@ -6,4 +6,3 @@
 pip install -r requirements.txt
 uvicorn uvicorn src.main:app --reload
 ```
->>>>>>> app2/main
