@@ -17,10 +17,10 @@ from .database import Base
 class TimeData(Base):
     __tablename__ = "datas"
 
-    id = Column(Integer, primary_key=True)
+    data_id = Column(Integer, primary_key=True)
     timestamp = Column(DateTime, index=True)
     # sensor_id = Column(Integer, ForeignKey("sensors.id"))
-    sensor_id = Column(Integer, index=True)
+    id = Column(Integer, index=True)
     value = Column(Integer, index=True)
     # sensor = relationship("Sensor", back_populates="datas")
 

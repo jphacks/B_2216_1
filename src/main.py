@@ -47,8 +47,10 @@ def get_today_data(sensor_id, db: Session = Depends(get_db)):
     return ret
 
 @app.post("/data/", response_model=schemas.TimeData)
-def push_data(data: schemas.TimeDataCreate, db: Session = Depends(get_db)):
-    ret = crud.create_timedata(db, timedata=data)
+def push_data(data: schemas.TimeDataPost, db: Session = Depends(get_db)):
+    value = data.w0 + data.w1 + data.w2 + data.w3
+    timedata = schemas.TimeDataCreate(**data.dict(), value=value)
+    ret = crud.create_timedata(db, timedata=timedata)
     if ret == None:
         raise HTTPException(status_code=404, detail="Sensor ID not found")
     return ret

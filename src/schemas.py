@@ -29,13 +29,19 @@ class User(UserBase):
         orm_mode = True
 
 class TimeDataBase(BaseModel):
-    sensor_id: int
-    value: int
+    id: int
+
+class TimeDataPost(TimeDataBase):
+    w0: float
+    w1: float
+    w2: float
+    w3: float
 
 class TimeDataCreate(TimeDataBase):
-    pass
+    value: float
 
 class TimeData(TimeDataBase):
     timestamp: datetime
+    value: float
     class Config:
         orm_mode = True
