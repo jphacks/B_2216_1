@@ -17,8 +17,8 @@
 #define HX711_DATA_4 16
 #define HX711_CLK_4 15
 
-const char* ssid = "TP-Link_0338";
-const char* pass = "09968035";
+const char* ssid = "******";
+const char* pass = "******";
 
 int count = 0;
 
