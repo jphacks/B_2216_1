@@ -47,8 +47,12 @@ def get_today_data(sensor_id, db: Session = Depends(get_db)):
     return ret
 
 @app.get("/data/mean/today/{sensor_id}", response_model=List[schemas.TimeData])
-def get_mean_by_hour(sensor_id: int, db: Session = Depends(get_db)):
-    return crud.get_timedata_mean(db, sensor_id=sensor_id)
+def get_means_day(sensor_id: int, db: Session = Depends(get_db)):
+    return crud.get_timedata_mean(db, sensor_id=sensor_id, days=1, timestep=24, offset_day=0)
+
+@app.get("/data/mean/week/{sensor_id}", response_model=List[schemas.TimeData])
+def get_means_week(sensor_id: int, db: Session = Depends(get_db)):
+    return crud.get_timedata_mean(db, sensor_id=sensor_id, days=7, timestep=7, offset_day=0)
 
 @app.post("/data/", response_model=schemas.TimeData)
 def push_data(data: schemas.TimeDataPost, db: Session = Depends(get_db)):

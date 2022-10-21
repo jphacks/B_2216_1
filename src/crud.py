@@ -41,13 +41,13 @@ def create_user_sensor(db: Session, sensor: schemas.SensorCreate, user_id: int):
 def get_timedata(db: Session, sensor_id: int, skip: int = 0, limit: int = 100):
     return db.query(models.TimeData).filter(models.TimeData.id == sensor_id).offset(skip).limit(limit).all()
 
-def get_timedata_mean(db: Session, sensor_id: int):
-    now = datetime.now()
+def get_timedata_mean(db: Session, sensor_id: int, days: int, timestep: int, offset_day: int = 0):
+    now = datetime.now() - timedelta(offset_day)
 
     ret = []
-    for i in range(24, 0, -1):
-        time = now - timedelta(1 - ((i - 1) / 24))
-        time_next = now - timedelta(1 - (i / 24))
+    for i in range(timestep, 0, -1):
+        time = now - timedelta((1 - ((i - 1) / timestep)) * days)
+        time_next = now - timedelta((1 - (i / timestep)) * days)
         datas = db.query(models.TimeData).filter(models.TimeData.id == sensor_id).filter(models.TimeData.timestamp > time).filter(models.TimeData.timestamp < time_next).all()
         mean = 0
         for data in datas:
