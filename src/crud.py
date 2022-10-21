@@ -24,18 +24,18 @@ def create_user(db: Session, user: schemas.UserCreate):
     db.refresh(db_user)
     return db_user
 
-def get_sensors(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Sensor).offset(skip).limit(limit).all()
+# def get_sensors(db: Session, skip: int = 0, limit: int = 100):
+#     return db.query(models.Sensor).offset(skip).limit(limit).all()
 
-def get_sensor(db: Session, sensor_id: int):
-    return db.query(models.Sensor).filter(models.Sensor.id == sensor_id).first()
+# def get_sensor(db: Session, sensor_id: int):
+#     return db.query(models.Sensor).filter(models.Sensor.id == sensor_id).first()
 
-def create_user_sensor(db: Session, sensor: schemas.SensorCreate, user_id: int):
-    db_sensor = models.Sensor(**sensor.dict(), user_id=user_id)
-    db.add(db_sensor)
-    db.commit()
-    db.refresh(db_sensor)
-    return db_sensor
+# def create_user_sensor(db: Session, sensor: schemas.SensorCreate, user_id: int):
+#     db_sensor = models.Sensor(**sensor.dict(), user_id=user_id)
+#     db.add(db_sensor)
+#     db.commit()
+#     db.refresh(db_sensor)
+#     return db_sensor
 
 
 def get_timedata(db: Session, sensor_id: int, skip: int = 0, limit: int = 100):
@@ -49,7 +49,7 @@ def get_timedata_mean(db: Session, sensor_id: int, days: int, timestep: int, off
         time = now - timedelta((1 - ((i - 1) / timestep)) * days)
         time_next = now - timedelta((1 - (i / timestep)) * days)
         datas = db.query(models.TimeData).filter(models.TimeData.id == sensor_id).filter(models.TimeData.timestamp > time).filter(models.TimeData.timestamp < time_next).all()
-        mean = 0
+        mean: float = 0
         for data in datas:
             mean += data.value
         if len(datas) > 0:
