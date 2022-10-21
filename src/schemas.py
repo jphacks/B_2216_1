@@ -45,3 +45,9 @@ class TimeData(TimeDataBase):
     value: float
     class Config:
         orm_mode = True
+
+class SittingData(BaseModel):
+    id: int
+    start: datetime
+    end: datetime
+    hours: float

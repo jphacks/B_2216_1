@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
-from pyexpat import model
 from sqlalchemy.orm import Session
+from typing import List
 
 from . import models, schemas
 
@@ -57,7 +57,24 @@ def get_timedata_mean(db: Session, sensor_id: int, days: int, timestep: int, off
         ret.append(schemas.TimeData(id=sensor_id, timestamp=time, value=mean))
     return ret
 
-def create_timedata(db: Session, timedata: schemas.TimeDataCreate):
+def get_sitting_time(db: Session, sensor_id: int, days: int, timestep: int, offset_day: int = 0, limit: float = 10):
+    now = datetime.now() - timedelta(offset_day)
+    time_per_step = days / timestep * 24
+
+    ret = []
+    for i in range(timestep, 0, -1):
+        start = now - timedelta((1 - ((i - 1) / timestep)) * days)
+        end = now - timedelta((1 - (i / timestep)) * days)
+        query = db.query(models.TimeData).filter(models.TimeData.id == sensor_id).filter(models.TimeData.timestamp > start).filter(models.TimeData.timestamp < end)
+        datas_all = query.all()
+        datas_sitting = query.filter(models.TimeData.value > limit).all()
+        hours: float = 0
+        if len(datas_all) > 0:
+            hours = time_per_step * (len(datas_sitting) / len(datas_all))
+        ret.append(schemas.SittingData(start=start, end=end, hours=hours, id=sensor_id))
+    return ret
+
+def create_timedata(db: Session, timedata: schemas.TimeDataCreate) -> List[schemas.SittingData]:
     now = datetime.now()
     db_timedata = models.TimeData(**timedata.dict(), timestamp=now)
     db.add(db_timedata)

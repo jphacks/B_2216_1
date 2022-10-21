@@ -62,3 +62,7 @@ def push_data(data: schemas.TimeDataPost, db: Session = Depends(get_db)):
     if ret == None:
         raise HTTPException(status_code=404, detail="Sensor ID not found")
     return ret
+
+@app.get("/data/sitting/today/{sensor_id}", response_model=List[schemas.SittingData])
+def get_sitting_time_day(sensor_id: int, db: Session = Depends(get_db)):
+    return crud.get_sitting_time(db, sensor_id=sensor_id, days=1, timestep=24)
