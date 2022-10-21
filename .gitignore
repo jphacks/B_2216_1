@@ -1,0 +1,15 @@
+venv/
+__pycache__/
+.mypy_cache/
+
+*.db
+
+# docker mysql volumes
+data/
+conf/
+
+# log
+logs/
+
+# envs
+.env*
