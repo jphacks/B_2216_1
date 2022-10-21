@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - '.github/**/*'
+      - 'health-chaireFW/**/*'
+      - 'README.md'
 
 jobs:
   build:
