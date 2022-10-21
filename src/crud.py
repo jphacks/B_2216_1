@@ -38,7 +38,7 @@ def create_user_sensor(db: Session, sensor: schemas.SensorCreate, user_id: int):
 
 
 def get_timedata(db: Session, sensor_id: int, skip: int = 0, limit: int = 100):
-    return db.query(models.TimeData).filter(models.TimeData.sensor_id == sensor_id).offset(skip).limit(limit).all()
+    return db.query(models.TimeData).filter(models.TimeData.id == sensor_id).offset(skip).limit(limit).all()
 
 
 def create_timedata(db: Session, timedata: schemas.TimeDataCreate):
