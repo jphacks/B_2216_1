@@ -3,26 +3,23 @@ from typing import List
 from pydantic import BaseModel
 
 class SensorBase(BaseModel):
-    description: str
+    id: int
+    user_id: int
 
 class SensorCreate(SensorBase):
     pass
 
 class Sensor(SensorBase):
-    id: int
-    user_id: int
-
     class Config:
         orm_mode = True
 
 class UserBase(BaseModel):
-    shown_id: str
+    id: int
 
 class UserCreate(UserBase):
     pass
 
 class User(UserBase):
-    id: int
     sensors: List[Sensor] = []
 
     class Config:

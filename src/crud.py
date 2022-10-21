@@ -8,34 +8,28 @@ from . import models, schemas
 def get_user(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()
 
-
-def get_user_by_shown_id(db: Session, shown_id: str):
-    return db.query(models.User).filter(models.User.shown_id == shown_id).first()
-
-
 def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
 
-
 def create_user(db: Session, user: schemas.UserCreate):
-    db_user = models.User(shown_id=user.shown_id)
+    db_user = models.User(**user.dict())
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     return db_user
 
-# def get_sensors(db: Session, skip: int = 0, limit: int = 100):
-#     return db.query(models.Sensor).offset(skip).limit(limit).all()
+def get_sensors(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Sensor).offset(skip).limit(limit).all()
 
-# def get_sensor(db: Session, sensor_id: int):
-#     return db.query(models.Sensor).filter(models.Sensor.id == sensor_id).first()
+def get_sensor(db: Session, sensor_id: int):
+    return db.query(models.Sensor).filter(models.Sensor.id == sensor_id).first()
 
-# def create_user_sensor(db: Session, sensor: schemas.SensorCreate, user_id: int):
-#     db_sensor = models.Sensor(**sensor.dict(), user_id=user_id)
-#     db.add(db_sensor)
-#     db.commit()
-#     db.refresh(db_sensor)
-#     return db_sensor
+def create_sensor(db: Session, sensor: schemas.SensorCreate):
+    db_sensor = models.Sensor(**sensor.dict())
+    db.add(db_sensor)
+    db.commit()
+    db.refresh(db_sensor)
+    return db_sensor
 
 
 def get_timedata(db: Session, sensor_id: int, skip: int = 0, limit: int = 100):
