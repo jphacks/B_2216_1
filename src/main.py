@@ -46,7 +46,7 @@ def get_today_data(sensor_id, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Sensor ID not found")
     return ret
 
-@app.get("/data/mean/today/{sensor_id}")
+@app.get("/data/mean/today/{sensor_id}", response_model=List[schemas.TimeData])
 def get_mean_by_hour(sensor_id: int, db: Session = Depends(get_db)):
     return crud.get_timedata_mean(db, sensor_id=sensor_id)
 
