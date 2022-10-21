@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+from pyexpat import model
 from sqlalchemy.orm import Session
 
 from . import models, schemas
@@ -40,6 +41,24 @@ def create_user_sensor(db: Session, sensor: schemas.SensorCreate, user_id: int):
 def get_timedata(db: Session, sensor_id: int, skip: int = 0, limit: int = 100):
     return db.query(models.TimeData).filter(models.TimeData.id == sensor_id).offset(skip).limit(limit).all()
 
+def get_timedata_mean(db: Session, sensor_id: int):
+    yesterday = datetime.now() - timedelta(1)
+    now = datetime.now()
+
+    ret = []
+    for i in range(24, 0, -1):
+        time = now - timedelta(1 - ((i - 1) / 24))
+        time_next = now - timedelta(1 - (i / 24))
+        datas = db.query(models.TimeData).filter(models.TimeData.id == sensor_id).filter(models.TimeData.timestamp > time).filter(models.TimeData.timestamp < time_next).all()
+        mean = 0
+        for data in datas:
+            mean += data.value
+        if len(datas) > 0:
+            mean /= len(datas)
+        else:
+            mean = -1
+        ret.append(schemas.TimeData(id=sensor_id, timestamp=time, value=mean))
+    return ret
 
 def create_timedata(db: Session, timedata: schemas.TimeDataCreate):
     now = datetime.now()
