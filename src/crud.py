@@ -42,7 +42,6 @@ def get_timedata(db: Session, sensor_id: int, skip: int = 0, limit: int = 100):
     return db.query(models.TimeData).filter(models.TimeData.id == sensor_id).offset(skip).limit(limit).all()
 
 def get_timedata_mean(db: Session, sensor_id: int):
-    yesterday = datetime.now() - timedelta(1)
     now = datetime.now()
 
     ret = []
