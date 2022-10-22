@@ -12,6 +12,7 @@ from ..dependencies.db import get_db
 datas_router = APIRouter(redirect_slashes=False, tags=['datas'])
 
 @datas_router.get("/data/today/{sensor_id}", response_model=List[schemas.TimeData])
+@datas_router.get("/data/today/{sensor_id}/", response_model=List[schemas.TimeData])
 def get_today_data(sensor_id, db: Session = Depends(get_db)):
     ret = crud.get_timedata(db, sensor_id=sensor_id, limit=24)
     if ret == None:
@@ -19,13 +20,16 @@ def get_today_data(sensor_id, db: Session = Depends(get_db)):
     return ret
 
 @datas_router.get("/data/mean/today/{sensor_id}", response_model=List[schemas.TimeData])
+@datas_router.get("/data/mean/today/{sensor_id}/", response_model=List[schemas.TimeData])
 def get_means_day(sensor_id: int, db: Session = Depends(get_db)):
     return crud.get_timedata_mean(db, sensor_id=sensor_id, days=1, timestep=24, offset_day=0)
 
 @datas_router.get("/data/mean/week/{sensor_id}", response_model=List[schemas.TimeData])
+@datas_router.get("/data/mean/week/{sensor_id}/", response_model=List[schemas.TimeData])
 def get_means_week(sensor_id: int, db: Session = Depends(get_db)):
     return crud.get_timedata_mean(db, sensor_id=sensor_id, days=7, timestep=7, offset_day=0)
 
+@datas_router.post("/data", response_model=schemas.TimeData)
 @datas_router.post("/data/", response_model=schemas.TimeData)
 def push_data(data: schemas.TimeDataPost, db: Session = Depends(get_db)):
     value = data.w0 + data.w1 + data.w2 + data.w3
@@ -36,5 +40,6 @@ def push_data(data: schemas.TimeDataPost, db: Session = Depends(get_db)):
     return ret
 
 @datas_router.get("/data/sitting/today/{sensor_id}", response_model=List[schemas.SittingData])
+@datas_router.get("/data/sitting/today/{sensor_id}/", response_model=List[schemas.SittingData])
 def get_sitting_time_day(sensor_id: int, db: Session = Depends(get_db)):
     return crud.get_sitting_time(db, sensor_id=sensor_id, days=1, timestep=24)
