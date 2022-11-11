@@ -10,7 +10,7 @@ class Hx711 {
   private:
     HX711 scale[SENSOR_NUM];
     float weight[SENSOR_NUM];
-    float divider[SENSOR_NUM] = {47880, 49791, 50805, 61491};
+    float divider[SENSOR_NUM] = {-52218, -52218, -52218, -52218};
   public:
     void setup(uint8_t data_pin1, uint8_t clk_pin1, uint8_t data_pin2, uint8_t clk_pin2, uint8_t data_pin3, uint8_t clk_pin3, uint8_t data_pin4, uint8_t clk_pin4) {
       Serial.println("### SENSOR INIT ###");
@@ -43,7 +43,7 @@ class Hx711 {
 
     void upd() {
       for (int i = 0; i < SENSOR_NUM; i++) {
-        float alpha = 0.92;
+        float alpha = 0.85;
         weight[i] = weight[i] * alpha + (scale[i].read() - save.data.offset[i]) / divider[i] * (1 - alpha);
       }
     }

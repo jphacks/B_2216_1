@@ -17,8 +17,8 @@
 #define HX711_DATA_4 16
 #define HX711_CLK_4 15
 
-const char* ssid = "******";
-const char* pass = "******";
+const char* ssid = "TP-Link_0338";
+const char* pass = "09968035";
 
 int count = 0;
 
@@ -28,7 +28,7 @@ void setup() {
   Serial.println("");
   save.setup();
   scale.setup(HX711_DATA_1, HX711_CLK_1, HX711_DATA_2, HX711_CLK_2, HX711_DATA_3, HX711_CLK_3, HX711_DATA_4, HX711_CLK_4);
-  scale.calibrate();
+  // scale.calibrate();
   ble.setup();
   wifi.setup(ssid, pass);
 }
@@ -60,9 +60,9 @@ void loop() {
     int status_code = httpClient.POST((uint8_t *)w_json, strlen(w_json));
     if (status_code == 200)
     {
-      Serial.println("[POST]Send to server");
+      //Serial.println("[POST]Send to server");
     } else {
-      Serial.println("[POST]failed to send to server");
+      //Serial.println("[POST]failed to send to server");
     }
     httpClient.end();
     count = 0;
