@@ -1,0 +1,1104 @@
+openapi: 3.0.2
+info:
+  title: FastAPI
+  version: 0.1.0
+paths:
+  /users/:
+    get:
+      tags:
+        - users
+        - sensors
+      summary: Read Users
+      operationId: read_users_users__get
+      parameters:
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 100
+          name: limit
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Users Users  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - users
+        - sensors
+      summary: Create User And Sensor
+      operationId: create_user_and_sensor_users__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users:
+    get:
+      tags:
+        - users
+        - sensors
+      summary: Read Users
+      operationId: read_users_users_get
+      parameters:
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 100
+          name: limit
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Users Users Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - users
+        - sensors
+      summary: Create User And Sensor
+      operationId: create_user_and_sensor_users_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/{user_id}/:
+    get:
+      tags:
+        - users
+        - sensors
+      summary: Read User
+      operationId: read_user_users__user_id___get
+      parameters:
+        - required: true
+          schema:
+            title: User Id
+            type: integer
+          name: user_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/{user_id}:
+    get:
+      tags:
+        - users
+        - sensors
+      summary: Read User
+      operationId: read_user_users__user_id__get
+      parameters:
+        - required: true
+          schema:
+            title: User Id
+            type: integer
+          name: user_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/today/{sensor_id}/:
+    get:
+      tags:
+        - datas
+      summary: Get Today Data
+      operationId: get_today_data_data_today__sensor_id___get
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Today Data Data Today  Sensor Id   Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeData'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/today/{sensor_id}:
+    get:
+      tags:
+        - datas
+      summary: Get Today Data
+      operationId: get_today_data_data_today__sensor_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Today Data Data Today  Sensor Id  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeData'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/weight/today/{sensor_id}/:
+    get:
+      tags:
+        - datas
+      summary: Get Means Day
+      operationId: get_means_day_data_weight_today__sensor_id___get
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+            type: integer
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Means Day Data Weight Today  Sensor Id   Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeData'
+              example:
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 30
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 61
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/weight/today/{sensor_id}:
+    get:
+      tags:
+        - datas
+      summary: Get Means Day
+      operationId: get_means_day_data_weight_today__sensor_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+            type: integer
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Means Day Data Weight Today  Sensor Id  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeData'
+              example:
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 30
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 61
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 0
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/weight/week/{sensor_id}/:
+    get:
+      tags:
+        - datas
+      summary: Get Means Week
+      operationId: get_means_week_data_weight_week__sensor_id___get
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+            type: integer
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Means Week Data Weight Week  Sensor Id   Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeData'
+              example:
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/weight/week/{sensor_id}:
+    get:
+      tags:
+        - datas
+      summary: Get Means Week
+      operationId: get_means_week_data_weight_week__sensor_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+            type: integer
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Means Week Data Weight Week  Sensor Id  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeData'
+              example:
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/:
+    post:
+      tags:
+        - datas
+      summary: Push Data
+      operationId: push_data_data__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeDataPost'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeData'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data:
+    post:
+      tags:
+        - datas
+      summary: Push Data
+      operationId: push_data_data_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeDataPost'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeData'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/sitting/today/{sensor_id}/:
+    get:
+      tags:
+        - datas
+      summary: Get Sitting Time Day
+      operationId: get_sitting_time_day_data_sitting_today__sensor_id___get
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+            type: integer
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: >-
+                  Response Get Sitting Time Day Data Sitting Today  Sensor Id  
+                  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/SittingData'
+              example:
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.3
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.9
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.7
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.4
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.0
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/sitting/today/{sensor_id}:
+    get:
+      tags:
+        - datas
+      summary: Get Sitting Time Day
+      operationId: get_sitting_time_day_data_sitting_today__sensor_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+            type: integer
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: >-
+                  Response Get Sitting Time Day Data Sitting Today  Sensor Id 
+                  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/SittingData'
+              example:
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.3
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.9
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.7
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.4
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.0
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 0.0
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/sitting/week/{sensor_id}/:
+    get:
+      tags:
+        - datas
+      summary: Get Sitting Week
+      operationId: get_sitting_week_data_sitting_week__sensor_id___get
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+            type: integer
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Sitting Week Data Sitting Week  Sensor Id   Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeData'
+              example:
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 3
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 6.1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 4
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/sitting/week/{sensor_id}:
+    get:
+      tags:
+        - datas
+      summary: Get Sitting Week
+      operationId: get_sitting_week_data_sitting_week__sensor_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+            type: integer
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Sitting Week Data Sitting Week  Sensor Id  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeData'
+              example:
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 3
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 6.1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 4
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    Sensor:
+      title: Sensor
+      required:
+        - id
+        - user_id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+        user_id:
+          title: User Id
+          type: integer
+    SittingData:
+      title: SittingData
+      required:
+        - id
+        - start
+        - end
+        - hours
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+        start:
+          title: Start
+          type: string
+          format: date-time
+        end:
+          title: End
+          type: string
+          format: date-time
+        hours:
+          title: Hours
+          type: number
+    TimeData:
+      title: TimeData
+      required:
+        - id
+        - timestamp
+        - value
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+        timestamp:
+          title: Timestamp
+          type: string
+          format: date-time
+        value:
+          title: Value
+          type: number
+    TimeDataPost:
+      title: TimeDataPost
+      required:
+        - id
+        - w0
+        - w1
+        - w2
+        - w3
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+        w0:
+          title: W0
+          type: number
+        w1:
+          title: W1
+          type: number
+        w2:
+          title: W2
+          type: number
+        w3:
+          title: W3
+          type: number
+    User:
+      title: User
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+        sensors:
+          title: Sensors
+          type: array
+          items:
+            $ref: '#/components/schemas/Sensor'
+          default: []
+    UserCreate:
+      title: UserCreate
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
