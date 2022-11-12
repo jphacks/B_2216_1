@@ -6,6 +6,7 @@ COPY src/ ./src
 COPY .env ./
 COPY poetry.lock ./
 COPY pyproject.toml ./
+COPY cert.pem ./
 
 RUN apt update
 RUN apt install default-libmysqlclient-dev curl -y
