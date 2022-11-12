@@ -41,7 +41,7 @@ class Hx711 {
       Serial.println("calibrate end");
     }
 
-    void upd() {
+    void update() {
       for (int i = 0; i < SENSOR_NUM; i++) {
         float alpha = 0.85;
         weight[i] = weight[i] * alpha + (scale[i].read() - save.data.offset[i]) / divider[i] * (1 - alpha);
