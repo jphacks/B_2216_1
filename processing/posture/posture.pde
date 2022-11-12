@@ -11,7 +11,7 @@ void setup() {
   background( 255 );
   circle(250, 250, 490);
   noStroke();
-  myPort = new Serial(this, Serial.list()[1], 500000);
+  myPort = new Serial(this, Serial.list()[0], 500000);
 }
 
 void draw() {
@@ -21,13 +21,13 @@ void draw() {
 
   fill(255);
   noStroke();
-  circle(prev_x, prev_y, 52);
+  circle(prev_x, prev_y, sum*2);
   fill(255);
   stroke(0);
   circle(250, 250, 490);
   fill(0, 0, 255);
   noStroke();
-  circle(int(x)+250, int(y)+250, 50);
+  circle(int(x)+250, int(y)+250, sum*1.8);
 
   prev_x = int(x)+250;
   prev_y = int(y)+250;
@@ -39,6 +39,13 @@ void serialEvent(Serial p) {
 
   if (inString != null) {
     inString = trim(inString);
+    if (Float.isNaN(float(split(inString, ','))[0])) {
+      return;
+    }
     data = float(split(inString, ','));
+    data[0] = data[0] + 5;
+    data[1] = data[1] + 5;
+    data[2] = data[2] + 5;
+    data[3] = data[3] + 5;
   }
 }
