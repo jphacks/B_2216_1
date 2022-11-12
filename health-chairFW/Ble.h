@@ -4,6 +4,8 @@
 #include <BLEDevice.h>
 #include <BLEUtils.h>
 #include <BLEServer.h>
+#include <ArduinoJson.h>
+#include <string.h>
 
 #include "Save.h"
 #include "Hx711.h"
@@ -13,6 +15,22 @@
 
 #define BT_NAME "smart-chair"
 
+static bool deviceConnected = false;
+static bool calibStatus = false;
+static bool wifiStatus = false;
+
+class BleServerCallbacks: public BLEServerCallbacks {
+    void onConnect(BLEServer* pServer) {
+      deviceConnected = true;
+      Serial.println("[*] BLE connected");
+    };
+
+    void onDisconnect(BLEServer* pServer) {
+      deviceConnected = false;
+      Serial.println("[*] BLE disconnected");
+    }
+};
+
 class BleCallbacks : public BLECharacteristicCallbacks {
     void onWrite(BLECharacteristic* pCharacteristic) {
       std::string value = pCharacteristic->getValue();
@@ -20,11 +38,35 @@ class BleCallbacks : public BLECharacteristicCallbacks {
       if (value.length() > 0) {
         String received = value.c_str();
         Serial.println(received);
-        if (received == "calibrate") {
-          scale.calibrate();
-        } else {
-          save.data.id = received.toInt();
+
+        StaticJsonDocument<150> doc;
+
+        // Deserialize the JSON document
+        DeserializationError error = deserializeJson(doc, received);
+
+        if (doc["ssid"] != nullptr) {
+          /* ssid pass設定 */
+          strcpy(save.data.ssid, doc["ssid"].as<const char*>());
+          strcpy(save.data.pass, doc["pass"].as<const char*>());
+          
+          Serial.print("Wifi setting to ");
+          Serial.print(save.data.ssid);
+          Serial.print(" ");
+          Serial.println(save.data.pass);
+          
           save.save();
+          wifiStatus = true;
+          
+          return;
+        } else {
+          if (received == "calibrate") {
+            calibStatus = true;
+          } else {
+            save.data.id = received.toInt();
+            save.save();
+            Serial.print("ID: ");
+            Serial.println(save.data.id);
+          }
         }
       }
     }
@@ -33,11 +75,15 @@ class BleCallbacks : public BLECharacteristicCallbacks {
 class Ble {
   private:
     BLECharacteristic* pCharacteristic;
+    BLEServer* pServer = NULL;
+    bool oldDeviceConnected = false;
+
   public:
     void setup() {
       Serial.println("### BLE INIT ###");
       BLEDevice::init(BT_NAME); // この名前がスマホなどに表示される
-      BLEServer* pServer = BLEDevice::createServer();
+      pServer = BLEDevice::createServer();
+      pServer->setCallbacks(new BleServerCallbacks());
       BLEService* pService = pServer->createService(SERVICE_UUID);
       pCharacteristic = pService->createCharacteristic(
                           CHARACTERISTIC_UUID,
@@ -58,8 +104,45 @@ class Ble {
     }
 
     void write(char* i) {
-      pCharacteristic->setValue(i);
-      pCharacteristic->notify();
+      if (deviceConnected) {
+        pCharacteristic->setValue(i);
+        pCharacteristic->notify();
+      }
+    }
+
+    void checkStatus() {
+      // disconnecting
+      if (!deviceConnected && oldDeviceConnected) {
+        delay(500); // give the bluetooth stack the chance to get things ready
+        pServer->startAdvertising(); // restart advertising
+        Serial.println("### BLE start advertising ###");
+        oldDeviceConnected = deviceConnected;
+      }
+      // connecting
+      if (deviceConnected && !oldDeviceConnected) {
+        // do stuff here on connecting
+        oldDeviceConnected = deviceConnected;
+      }
+    }
+
+    bool getCalibStatus() {
+      if (calibStatus) {
+        calibStatus = false;
+        return true;
+      }
+      return false;
+    }
+
+    bool getWifiSetupStatus(){
+      if(wifiStatus){
+        wifiStatus = false;
+        return true;
+      }
+      return false;
+    }
+
+    bool getConnectStatus(){
+      return deviceConnected;
     }
 
 };
