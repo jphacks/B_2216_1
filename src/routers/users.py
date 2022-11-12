@@ -10,6 +10,7 @@ from ..dependencies.db import get_db
 
 users_router = APIRouter(redirect_slashes=False, tags=['users', 'sensors'])
 
+# post user
 @users_router.post("/users", response_model=schemas.User)
 @users_router.post("/users/", response_model=schemas.User)
 def create_user_and_sensor(user: schemas.UserCreate, db: Session = Depends(get_db)):

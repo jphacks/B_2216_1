@@ -14,9 +14,10 @@ class Sensor(SensorBase):
         orm_mode = True
 
 class UserBase(BaseModel):
-    id: int
+    id: int              # corresponds with sensor id
 
 class UserCreate(UserBase):
+    device_token: str    # used when calling APNs API
     pass
 
 class User(UserBase):

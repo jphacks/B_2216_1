@@ -30,6 +30,6 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    # shown_id = Column(String, index=True, unique=True)
+    device_token = Column(String, index=True)
     # sensor_id = Column(Integer, ForeignKey("sensors.id"))
     sensors = relationship("Sensor", back_populates="user")
