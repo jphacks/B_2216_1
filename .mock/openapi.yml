@@ -1113,7 +1113,7 @@ paths:
                 title: Response Get Sitting Week Data Sitting Week  Sensor Id   Get
                 type: array
                 items:
-                  $ref: '#/components/schemas/TimeData'
+                  $ref: '#/components/schemas/SittingData'
               example:
                 - id: 1
                   start: "2022-11-11T13:01:47.381Z"
@@ -1171,7 +1171,7 @@ paths:
                 title: Response Get Sitting Week Data Sitting Week  Sensor Id  Get
                 type: array
                 items:
-                  $ref: '#/components/schemas/TimeData'
+                  $ref: '#/components/schemas/SittingData'
               example:
                 - id: 1
                   start: "2022-11-11T13:01:47.381Z"
@@ -1229,7 +1229,7 @@ paths:
                 title: Response Get Sitting Week Data Sitting Week  Sensor Id  Get
                 type: array
                 items:
-                  $ref: '#/components/schemas/TimeData'
+                  $ref: '#/components/schemas/SittingData'
               example:
                 - id: 1
                   start: "2022-11-11T13:01:47.381Z"
@@ -1379,7 +1379,7 @@ paths:
                 title: Response Get Sitting Week Data Sitting Week  Sensor Id  Get
                 type: array
                 items:
-                  $ref: '#/components/schemas/TimeData'
+                  $ref: '#/components/schemas/SittingData'
               example:
                 - id: 1
                   start: "2022-11-11T13:01:47.381Z"
