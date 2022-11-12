@@ -50,6 +50,11 @@ def notify(db: Session, user_id: int, time: timedelta):
     hour = time.total_seconds() / (60 * 60) # seconds -> hour
     
     title = '少し休憩しましょう'
-    body = f'{hour}時間連続で座っています'
+    body = f'{int(hour):}時間連続で座っています'
 
-    call_apns_api(device_token, title=title, body=body)
+    res = call_apns_api(device_token, title=title, body=body)
+
+    if res.status_code == 200:
+        return True
+    else:
+        return False

@@ -1,11 +1,7 @@
 import httpx
 import json
-# from .env_vars import APNS_TOPIC, APNS_DOMAIN, CL_CERT_PATH
+from .env_vars import APNS_TOPIC, APNS_DOMAIN, CL_CERT_PATH
 import logging
-
-APNS_DOMAIN='api.sandbox.push.apple.com'
-APNS_TOPIC='com.igaryo.HealthChair'
-CL_CERT_PATH='cert.pem'
 
 client = httpx.Client(http2=True, cert=CL_CERT_PATH)
 HEADERS = {'apns-topic': APNS_TOPIC}
@@ -25,9 +21,10 @@ def call_apns_api(device_id: str, title: str, body: str):
             }
         }
     }
-    payload_json = json.dumps(payload_dict)
-    res = client.post(full_url, json=payload_json, headers=HEADERS)
+    res = client.post(full_url, json=payload_dict, headers=HEADERS)
     if res.status_code != 200:
         logger.error(res, res.content)
     else:
+        print(res, res.content)
         logger.info(res, res.content)
+    return res
