@@ -4,6 +4,7 @@
 #include "Ble.h"
 
 #include <HTTPClient.h>
+#include <ArduinoJson.h>
 
 #define HX711_DATA_1 23
 #define HX711_CLK_1 22
@@ -17,6 +18,8 @@
 #define HX711_DATA_4 16
 #define HX711_CLK_4 15
 
+//#define USE_WIFI
+
 const char* ssid = "TP-Link_0338";
 const char* pass = "09968035";
 
@@ -28,29 +31,31 @@ void setup() {
   Serial.println("");
   save.setup();
   scale.setup(HX711_DATA_1, HX711_CLK_1, HX711_DATA_2, HX711_CLK_2, HX711_DATA_3, HX711_CLK_3, HX711_DATA_4, HX711_CLK_4);
-  // scale.calibrate();
   ble.setup();
+
+#ifdef USE_WIFI
   wifi.setup(ssid, pass);
+#endif
 }
 
 void loop() {
-  scale.upd();
+  /* scaleの更新 */
+  scale.update();
 
   /* jsonの作成*/
   char w_json[100];
-  char w0[6];
-  char w1[6];
-  char w2[6];
-  char w3[6];
-  dtostrf(scale.getWeight(0), 5, 2, w0);
-  dtostrf(scale.getWeight(1), 5, 2, w1);
-  dtostrf(scale.getWeight(2), 5, 2, w2);
-  dtostrf(scale.getWeight(3), 5, 2, w3);
-  sprintf(w_json, "{\"id\":%d,\"w0\":%s,\"w1\":%s,\"w2\":%s,\"w3\":%s}", save.data.id, w0, w1, w2, w3);
-  //Serial.println(w_json);
+  StaticJsonDocument<96> doc;
+  doc["id"] = save.data.id;
+  doc["w0"] = scale.getWeight(0);
+  doc["w1"] = scale.getWeight(1);
+  doc["w2"] = scale.getWeight(2);
+  doc["w3"] = scale.getWeight(3);
+  serializeJson(doc, w_json);
+  Serial.println(w_json);
 
+#ifdef USE_WIFI
+  /* wifiの状況確認 */
   wifi.checkStatus();
-
   /* http送信*/
   if (count > 200) {
     HTTPClient httpClient;
@@ -68,6 +73,7 @@ void loop() {
     count = 0;
   }
   count++;
+#endif
 
   /* BLE送信 */
   ble.write(w_json);
@@ -86,7 +92,7 @@ void loop() {
     char incoming = Serial.read();
     if (incoming == 'r') {
       ESP.restart();
-    }else if(incoming=='c'){
+    } else if (incoming == 'c') {
       scale.calibrate();
     }
   }

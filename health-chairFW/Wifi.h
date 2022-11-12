@@ -8,6 +8,7 @@ class Wifi {
       // WiFiのアクセスポイントに接続
       Serial.println("### WIFI INIT ###");
       WiFi.begin(ssid, pass);
+      Serial.print("WiFi connecting");
       while (WiFi.status() != WL_CONNECTED) {
         delay(500);
       }
