@@ -25,6 +25,5 @@ def call_apns_api(device_id: str, title: str, body: str):
     if res.status_code != 200:
         logger.error(res, res.content)
     else:
-        print(res, res.content)
         logger.info(res, res.content)
     return res
