@@ -18,10 +18,7 @@
 #define HX711_DATA_4 16
 #define HX711_CLK_4 15
 
-//#define USE_WIFI
-
-const char* ssid = "TP-Link_0338";
-const char* pass = "09968035";
+#define USE_WIFI
 
 int count = 0;
 
@@ -31,11 +28,11 @@ void setup() {
   Serial.println("");
   save.setup();
   scale.setup(HX711_DATA_1, HX711_CLK_1, HX711_DATA_2, HX711_CLK_2, HX711_DATA_3, HX711_CLK_3, HX711_DATA_4, HX711_CLK_4);
-  ble.setup();
 
 #ifdef USE_WIFI
-  wifi.setup(ssid, pass);
+  wifi.setup(save.data.ssid, save.data.pass);
 #endif
+  ble.setup();
 }
 
 void loop() {
@@ -43,31 +40,43 @@ void loop() {
   scale.update();
 
   /* jsonの作成*/
-  char w_json[100];
-  StaticJsonDocument<96> doc;
+  char ios_json[130];
+  StaticJsonDocument<100> doc;
   doc["id"] = save.data.id;
   doc["w0"] = scale.getWeight(0);
   doc["w1"] = scale.getWeight(1);
   doc["w2"] = scale.getWeight(2);
   doc["w3"] = scale.getWeight(3);
-  serializeJson(doc, w_json);
-  Serial.println(w_json);
+  doc["wifi"] = wifi.getStatus();
+  serializeJson(doc, ios_json);
+  //  Serial.println(ios_json);
 
 #ifdef USE_WIFI
-  /* wifiの状況確認 */
-  wifi.checkStatus();
   /* http送信*/
   if (count > 200) {
+    /* wifiの状況確認 */
+    if (!ble.getConnectStatus()) {
+      wifi.setup(save.data.ssid, save.data.pass);
+    }
+    char server_json[130];
+    StaticJsonDocument<100> doc;
+    doc["id"] = save.data.id;
+    doc["w0"] = scale.getWeight(0);
+    doc["w1"] = scale.getWeight(1);
+    doc["w2"] = scale.getWeight(2);
+    doc["w3"] = scale.getWeight(3);
+    serializeJson(doc, server_json);
+
     HTTPClient httpClient;
     httpClient.begin("http://api.jphacks2022.so298.net/data/");
     httpClient.addHeader("Content-Type", "application/json");
     //  POSTしてステータスコードを取得する
-    int status_code = httpClient.POST((uint8_t *)w_json, strlen(w_json));
+    int status_code = httpClient.POST((uint8_t *)server_json, strlen(server_json));
     if (status_code == 200)
     {
-      //Serial.println("[POST]Send to server");
+      Serial.println("[*] POST Success");
     } else {
-      //Serial.println("[POST]failed to send to server");
+      Serial.println("[*] POST Failed");
     }
     httpClient.end();
     count = 0;
@@ -76,8 +85,17 @@ void loop() {
 #endif
 
   /* BLE送信 */
-  ble.write(w_json);
+  ble.write(ios_json);
+  ble.checkStatus();
   delay(100);
+
+  /* キャリブ */
+  if (ble.getCalibStatus()) {
+    scale.calibrate();
+  }
+  if(ble.getWifiSetupStatus()){
+    wifi.setup(save.data.ssid, save.data.pass);
+  }
 
   /* print*/
   //Serial.println(scale.getWeight(0) + scale.getWeight(1) + scale.getWeight(2) + scale.getWeight(3));
@@ -96,4 +114,5 @@ void loop() {
       scale.calibrate();
     }
   }
+
 }
