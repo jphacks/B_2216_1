@@ -75,3 +75,24 @@ def create_timedata(db: Session, timedata: schemas.TimeDataCreate) -> List[schem
     db.commit()
     db.refresh(db_timedata)
     return db_timedata
+
+def find_continuous_sitting(db: Session, user_id: int):
+    c_sitting = db.query(models.ContinuousSitting).filter(models.ContinuousSitting.user_id == user_id).first()
+    return c_sitting
+
+def create_continuous_sitting(db: Session, c_sitting: schemas.ContinuousSittingTime) -> models.ContinuousSitting:
+    cs_mod = models.ContinuousSitting(**c_sitting.dict())
+    db.add(cs_mod)
+    db.commit()
+    db.refresh(cs_mod)
+    return cs_mod
+
+def update_continuous_sitting(db: Session, c_sitting: schemas.ContinuousSittingTime) -> bool:
+    prev = find_continuous_sitting(db, c_sitting.user_id)
+    if prev == None:
+        return False
+    
+    prev.last_notify = c_sitting.last_notify
+    prev.last_stand = c_sitting.last_stand
+    db.commit()
+    return True

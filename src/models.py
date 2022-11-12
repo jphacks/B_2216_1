@@ -33,3 +33,11 @@ class User(Base):
     device_token = Column(String, index=True)
     # sensor_id = Column(Integer, ForeignKey("sensors.id"))
     sensors = relationship("Sensor", back_populates="user")
+
+class ContinuousSitting(Base):
+    __tablename__ = "c_sitting"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    last_stand = Column(DateTime, index=True)
+    last_notify = Column(DateTime, index=True)

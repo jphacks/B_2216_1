@@ -27,7 +27,7 @@ class User(UserBase):
         orm_mode = True
 
 class TimeDataBase(BaseModel):
-    id: int
+    id: int # user ID
 
 class TimeDataPost(TimeDataBase):
     w0: float
@@ -49,3 +49,16 @@ class SittingData(BaseModel):
     start: datetime
     end: datetime
     hours: float
+
+class ContinuousSittingTimeBase(BaseModel):
+    user_id: int
+
+class ContinuousSittingTimeCreate(ContinuousSittingTimeBase):
+    time_now: datetime
+    is_standup: bool
+
+class ContinuousSittingTime(ContinuousSittingTimeBase):
+    last_stand: datetime
+    last_notify: datetime
+    class Config:
+        orm_mode = True
