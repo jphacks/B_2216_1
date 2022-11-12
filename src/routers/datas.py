@@ -5,7 +5,7 @@ from typing import List
 
 import sys, os
 sys.path.append(os.pardir)
-from .. import schemas, crud
+from .. import schemas, crud, apns
 
 from ..dependencies.db import get_db
 
