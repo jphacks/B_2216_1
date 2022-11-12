@@ -29,6 +29,11 @@ def get_means_day(sensor_id: int, db: Session = Depends(get_db)):
 def get_means_week(sensor_id: int, db: Session = Depends(get_db)):
     return crud.get_timedata_mean(db, sensor_id=sensor_id, days=7, timestep=7, offset_day=0)
 
+@datas_router.get("/data/weight/month/{sensor_id}", response_model=List[schemas.TimeData])
+@datas_router.get("/data/weight/month/{sensor_id}/", response_model=List[schemas.TimeData])
+def get_means_month(sensor_id: int, db: Session = Depends(get_db)):
+    return crud.get_timedata_mean(db, sensor_id=sensor_id, days=30, timestep=30, offset_day=0)
+
 @datas_router.post("/data", response_model=schemas.TimeData)
 @datas_router.post("/data/", response_model=schemas.TimeData)
 def push_data(data: schemas.TimeDataPost, db: Session = Depends(get_db)):
@@ -48,3 +53,8 @@ def get_sitting_time_day(sensor_id: int, db: Session = Depends(get_db)):
 @datas_router.get("/data/sitting/week/{sensor_id}/", response_model=List[schemas.TimeData])
 def get_sitting_week(sensor_id: int, db: Session = Depends(get_db)):
     return crud.get_timedata_mean(db, sensor_id=sensor_id, days=7, timestep=7, offset_day=0)
+
+@datas_router.get("/data/sitting/month/{sensor_id}", response_model=List[schemas.TimeData])
+@datas_router.get("/data/sitting/month/{sensor_id}/", response_model=List[schemas.TimeData])
+def get_sitting_month(sensor_id: int, db: Session = Depends(get_db)):
+    return crud.get_timedata_mean(db, sensor_id=sensor_id, days=30, timestep=30, offset_day=0)

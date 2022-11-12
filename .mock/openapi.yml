@@ -545,6 +545,246 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /data/weight/month/{sensor_id}/:
+    get:
+      tags:
+        - datas
+      summary: Get Means Week
+      operationId: get_means_month_data_weight_month__sensor_id___get
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+            type: integer
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Means Week Data Weight Week  Sensor Id   Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeData'
+              example:
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/weight/month/{sensor_id}:
+    get:
+      tags:
+        - datas
+      summary: Get Means Week
+      operationId: get_means_month_data_weight_month__sensor_id___get_2
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+            type: integer
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Means Week Data Weight Week  Sensor Id   Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeData'
+              example:
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 59
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 63
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 64
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+                - id: 1
+                  timestamp: "2022-11-11T12:55:21.351Z"
+                  value: 60
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /data/:
     post:
       tags:
@@ -953,6 +1193,306 @@ paths:
                   start: "2022-11-11T13:01:47.381Z"
                   end: "2022-11-11T13:01:47.381Z"
                   hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 6.1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 4
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/sitting/month/{sensor_id}/:
+    get:
+      tags:
+        - datas
+      summary: Get Sitting Week
+      operationId: get_sitting_month_data_sitting_month__sensor_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+            type: integer
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Sitting Week Data Sitting Week  Sensor Id  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeData'
+              example:
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 3
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 6.1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 4
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 3
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 6.1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 4
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 3
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 6.1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 4
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 3
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 6.1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 4
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 6.1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 4
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /data/sitting/month/{sensor_id}:
+    get:
+      tags:
+        - datas
+      summary: Get Sitting Week
+      operationId: get_sitting_month_data_sitting_month__sensor_id__get2
+      parameters:
+        - required: true
+          schema:
+            title: Sensor Id
+            type: integer
+          name: sensor_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Sitting Week Data Sitting Week  Sensor Id  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeData'
+              example:
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 3
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 6.1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 4
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 3
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 6.1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 4
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 3
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 6.1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 4
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 3
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 7.8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 8
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 6.1
+                - id: 1
+                  start: "2022-11-11T13:01:47.381Z"
+                  end: "2022-11-11T13:01:47.381Z"
+                  hours: 4
                 - id: 1
                   start: "2022-11-11T13:01:47.381Z"
                   end: "2022-11-11T13:01:47.381Z"
