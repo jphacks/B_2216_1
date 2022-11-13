@@ -5,6 +5,7 @@ from .schemas import ContinuousSittingTime, ContinuousSittingTimeCreate, TimeDat
 from .crud import find_continuous_sitting, create_continuous_sitting, update_continuous_sitting, get_user
 from .apns import call_apns_api
 
+
 def handle_timedata(db: Session, timedata: TimeData, duration_min: int = 2 * 60):
     is_sitting = timedata.value > 10
 
@@ -21,7 +22,7 @@ def handle_timedata(db: Session, timedata: TimeData, duration_min: int = 2 * 60)
         if check_notify(timedata.timestamp, last_stand, last_notify, duration_min):
             # if we should send notify
             delta = timedata.timestamp - last_stand
-            notify(db, timedata.id, delta)
+            notify_rest(db, timedata.id, delta)
             last_notify = timedata.timestamp
 
         new_sitting = ContinuousSittingTime(
@@ -44,13 +45,32 @@ def check_notify(now: datetime, last_stand: datetime, last_notify: datetime, dur
     else:
         return False
 
-def notify(db: Session, user_id: int, time: timedelta):
+
+def notify_rest(db: Session, user_id: int, time: timedelta):
     user = get_user(db, user_id)
+    if user == None:
+        return False
     device_token = user.device_token
-    hour = time.total_seconds() / (60 * 60) # seconds -> hour
-    
+    hour = time.total_seconds() / (60 * 60)  # seconds -> hour
+
     title = '少し休憩しましょう'
     body = f'{int(hour):}時間連続で座っています'
+
+    res = call_apns_api(device_token, title=title, body=body)
+
+    if res.status_code == 200:
+        return True
+    else:
+        return False
+
+def notify_posture(db: Session, user_id: int):
+    user = get_user(db, user_id)
+    if user == None:
+        return False
+    device_token = user.device_token
+
+    title = '疲れていませんか？'
+    body =  '姿勢が悪くなっています'
 
     res = call_apns_api(device_token, title=title, body=body)
 
