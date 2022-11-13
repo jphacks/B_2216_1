@@ -18,7 +18,8 @@ def call_apns_api(device_id: str, title: str, body: str):
             'alert': {
                 'title': title,
                 'body': body
-            }
+            },
+            'sound': 'default'
         }
     }
     res = client.post(full_url, json=payload_dict, headers=HEADERS)
