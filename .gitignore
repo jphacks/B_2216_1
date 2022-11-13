@@ -21,3 +21,6 @@ nohup.out
 
 # certificates
 *.pem
+
+# setup
+setup_local.sh
